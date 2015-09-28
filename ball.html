@@ -16,7 +16,7 @@
 
   <body>
 
-    <canvas id="canvas-for-ball"></canvas>
+    <canvas id="canvas-for-ball" style="border:1px solid #000000;"></canvas>
 
     <script type="text/javascript">
 
@@ -27,22 +27,62 @@
       
       // The vertical location of the ball.
       var y = 10;
+      var x = 10;
+	  var r = 3;
 
       // A function to repeat every time the animation loops.
       function repeatme() {
+		  ctx.clearRect(0, 0, canvas.width, canvas.height)
         // Draw the ball (stroked, not filled).
         ctx.beginPath();
-        ctx.arc(50, y, 3, 0, 2 * Math.PI);
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
         ctx.stroke();
         
         // Update the y location.
         y += 1;
-        
+		  
+		// if ball reaches bottom of the canvas, stop the animation
+		if(y >= canvas.height - r){
+
+		  window.cancelAnimationFrame(repeatme);
+			 
+		
+			 window.requestAnimationFrame(returnToTop);
+			
+		} else {
+			  
         window.requestAnimationFrame(repeatme);
-      }
+		}
+			 
+      } // repeatme()
+        
+        // A function to repeat every time the animation loops.
+      function returnToTop() {
+		  
+        // Draw the ball (stroked, not filled).
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, 2 * Math.PI);
+        ctx.stroke();
+        
+        // Update the y location.
+        y -= 1;
+		  
+		  // if ball reaches bottom of the canvas, stop the animation
+		if(y <= canvas.height + r){
+
+		  window.cancelAnimationFrame(returnToTop);
+			return;
+		} else {
+        
+        window.requestAnimationFrame(returnToTop);
+		}
+		  
+      } // returnToTop()
       
-      // Get the animation going.
-      repeatme();
+	
+		// get the animation going
+      repeatme();	
+
 
     </script>
 
