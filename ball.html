@@ -24,25 +24,41 @@
       var canvas = document.getElementById("canvas-for-ball");
       // Get a 2D context for the canvas.
       var ctx = canvas.getContext("2d");
-      
-      // The vertical location of the ball.
-      var y = 10;
-      var x = 10;
-	  var r = 3;
+		 
+		 var ball = {
+			 
+			 x: "0"
+			 ,y: "0"
+			 ,r: "0"
+			 ,draw: function(){
+			 
+				// clear the canvas so the object can be redrawn
+			  ctx.clearRect(0, 0, canvas.width, canvas.height)
+			  // Draw the ball (stroked, not filled).
+			  ctx.beginPath();
+			  ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI);
+			  ctx.stroke(); 
+			 
+			} // draw()
+			 
+		 }; // ball object
+		 
+		 // initialised values
+		 ball.x = 10;
+		 ball.y = 10;
+		 ball.r = 3;
 
       // A function to repeat every time the animation loops.
       function repeatme() {
-		  ctx.clearRect(0, 0, canvas.width, canvas.height)
-        // Draw the ball (stroked, not filled).
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, 2 * Math.PI);
-        ctx.stroke();
+			
+			// draws the ball
+			ball.draw();
         
         // Update the y location.
-        y += 1;
+        ball.y += 1;
 		  
 		// if ball reaches bottom of the canvas, stop the animation
-		if(y >= canvas.height - r){
+		if(ball.y >= canvas.height - ball.r){
 
 		  window.cancelAnimationFrame(repeatme);
 			 
@@ -58,20 +74,20 @@
         
         // A function to repeat every time the animation loops.
       function returnToTop() {
-		  
-        // Draw the ball (stroked, not filled).
-        ctx.beginPath();
-        ctx.arc(x, y, 3, 0, 2 * Math.PI);
-        ctx.stroke();
+			
+		  // draws the ball
+			ball.draw();
         
         // Update the y location.
-        y -= 1;
+        ball.y -= 1;
 		  
 		  // if ball reaches bottom of the canvas, stop the animation
-		if(y <= canvas.height + r){
+		if(ball.y <= 0 + ball.r){
 
 		  window.cancelAnimationFrame(returnToTop);
-			return;
+			
+			window.requestAnimationFrame(repeatme);
+			
 		} else {
         
         window.requestAnimationFrame(returnToTop);
@@ -81,7 +97,10 @@
       
 	
 		// get the animation going
-      repeatme();	
+      repeatme();
+		 
+			 
+
 
 
     </script>
