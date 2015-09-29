@@ -64,7 +64,7 @@
         
         // add velocity to ball
 			ball.x += ball.vx;
-        ball.y += ball.vy;
+            ball.y += ball.vy;
 	
 			// adds gravity
 			ball.vy += gravity;
@@ -77,6 +77,8 @@
 
 			// makes the ball bounce back
 			ball.vy = -ball.vy;
+            
+            ball.vy *= .7;
 			
 		} // if
 			
@@ -88,6 +90,8 @@
 			
 			// makes the ball bounce back
 			ball.vy = -ball.vy;
+            
+            ball.vy *= .7;
 			
 		} // if
 			
@@ -99,6 +103,8 @@
 
 			// makes the ball bounce back
 			ball.vx = - ball.vx;
+            
+            ball.vx *= .7;
 			
 		} // if
 			
@@ -110,6 +116,8 @@
 
 			// makes the ball bounce back
 			ball.vx = - ball.vx;
+            
+            ball.vx *= .7
 			
 		} // if
 			
