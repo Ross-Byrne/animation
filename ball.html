@@ -22,11 +22,11 @@
 		 
       // Gets a handle to the element with id canvasOne.
       var canvas = document.getElementById("canvas-for-ball");
+		 
       // Get a 2D context for the canvas.
       var ctx = canvas.getContext("2d");
 		 
 		 var gravity = 0.1;
-		 var bounceFactor = 0.7;
 		 
 		 var ball = {
 			 
@@ -56,9 +56,6 @@
       // A function to repeat every time the animation loops.
       function update() {
 			
-			console.log("vx: " + ball.vx);
-			console.log("vy: " + ball.vy);
-			
 			// clear the canvas so the object can be redrawn
 		  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -69,15 +66,16 @@
 			ball.x += ball.vx;
         ball.y += ball.vy;
 	
-			// add some acceleration
-			
+			// adds gravity
 			ball.vy += gravity;
 		  
 		// if ball reaches bottom of the canvas, bounce back
 		if(ball.y >= canvas.height - ball.r){
 			
+			// stops the ball from leaving canvas
 			ball.y = canvas.height - ball.r;
 
+			// makes the ball bounce back
 			ball.vy = -ball.vy;
 			
 		} // if
@@ -85,8 +83,10 @@
 		// if the ball reaches the top of the canvas, bounce back
 		if(ball.y <= 0 + ball.r){
 			
+			// stops the ball from leaving canvas
 			ball.y = 0 + ball.r;
 			
+			// makes the ball bounce back
 			ball.vy = -ball.vy;
 			
 		} // if
@@ -94,8 +94,10 @@
 			// if ball reaches right side of the canvas, bounce back
 		if(ball.x >= canvas.width - ball.r){
 			
+			// stops the ball from leaving canvas
 			ball.x = canvas.width - ball.r;
 
+			// makes the ball bounce back
 			ball.vx = - ball.vx;
 			
 		} // if
@@ -103,8 +105,10 @@
 		// if ball reaches left side of the canvas, bounce back
 		if(ball.x <= 0 + ball.r){
 			
+			// stops the ball from leaving canvas
 			ball.x = 0 + ball.r;
 
+			// makes the ball bounce back
 			ball.vx = - ball.vx;
 			
 		} // if
